@@ -1,0 +1,179 @@
+/* ==========================================================================
+   AKINEN Portfolio — Design Tokens
+   --------------------------------------------------------------------------
+   構成
+     Tier 1  Primitive : 生の値。コンポーネントから直接参照しない
+     Tier 2  Semantic  : 意図で命名したエイリアス。CSS はこちらだけを参照する
+
+   原則
+     - Color   : 彩度 0 のニュートラルグレーのみ（モノトーン）
+     - Type    : 大きめの本文（17–19px）と流体スケール（clamp）
+     - Space   : 4px ベース。セクション間は広く、要素内は詰める
+     - Shape   : 角丸なし。罫線と余白だけで構造を示す
+
+   Breakpoints（メディアクエリでは変数を使えないため値を明記）
+     md : 48rem (768px)   — 2 カラム化
+     lg : 64rem (1024px)  — 12 カラムグリッド、見出しの sticky
+   ========================================================================== */
+
+:root {
+  /* ------------------------------------------------------------------------
+     Tier 1 — Primitive
+     ------------------------------------------------------------------------ */
+
+  /* Neutral scale (chroma 0) */
+  --gray-0: #ffffff;
+  --gray-50: #fafafa;
+  --gray-100: #f1f1f1;
+  --gray-200: #e3e3e3;
+  --gray-300: #cfcfcf;
+  --gray-400: #a3a3a3;
+  --gray-500: #8a8a8a;
+  --gray-600: #6b6b6b;
+  --gray-700: #474747;
+  --gray-800: #262626;
+  --gray-900: #171717;
+  --gray-950: #0c0c0c;
+
+  /* Font families — Latin は Inter Tight、和文は Noto Sans JP */
+  --font-family-latin: "Inter Tight", "Helvetica Neue", Arial;
+  --font-family-jp: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo;
+
+  /* Fluid type scale — min @360px → max @1440px */
+  --size-100: clamp(0.8125rem, 0.78rem + 0.12vw, 0.875rem);   /* 13 → 14 */
+  --size-200: clamp(1.0625rem, 1rem + 0.28vw, 1.1875rem);     /* 17 → 19 */
+  --size-300: clamp(1.1875rem, 1.06rem + 0.56vw, 1.5rem);     /* 19 → 24 */
+  --size-400: clamp(1.5rem, 1.25rem + 1.11vw, 2.25rem);       /* 24 → 36 */
+  --size-500: clamp(1.75rem, 1.33rem + 1.85vw, 3rem);         /* 28 → 48 */
+  --size-600: clamp(2.125rem, 1.4rem + 3.2vw, 4.25rem);       /* 34 → 68 */
+  --size-700: clamp(4rem, 1rem + 15vw, 16rem);                /* wordmark */
+
+  /* Spacing — 4px base */
+  --space-1: 0.25rem;   /*   4 */
+  --space-2: 0.5rem;    /*   8 */
+  --space-3: 0.75rem;   /*  12 */
+  --space-4: 1rem;      /*  16 */
+  --space-5: 1.5rem;    /*  24 */
+  --space-6: 2rem;      /*  32 */
+  --space-7: 2.5rem;    /*  40 */
+  --space-8: 3rem;      /*  48 */
+  --space-9: 4rem;      /*  64 */
+  --space-10: 6rem;     /*  96 */
+  --space-11: 8rem;     /* 128 */
+  --space-12: 12rem;    /* 192 */
+
+  /* ------------------------------------------------------------------------
+     Tier 2 — Semantic
+     ------------------------------------------------------------------------ */
+
+  /* Color */
+  --color-bg: var(--gray-50);
+  --color-surface: var(--gray-0);
+  --color-text: var(--gray-950);
+  --color-text-muted: var(--gray-600);      /* 5.1:1 on bg — 本文補足に使用可 */
+  --color-text-subtle: var(--gray-400);     /* 装飾的な番号・記号のみ */
+  --color-line: var(--gray-200);
+  --color-line-strong: var(--gray-950);
+  --color-focus: var(--gray-950);
+  --color-selection-bg: var(--gray-950);
+  --color-selection-text: var(--gray-50);
+  --color-header-bg: color-mix(in srgb, var(--gray-50) 82%, transparent);
+
+  /* Typography — family */
+  --font-sans: var(--font-family-latin), var(--font-family-jp), sans-serif;
+
+  /* Typography — role */
+  --text-caption: var(--size-100);   /* ラベル・メタ情報 */
+  --text-body: var(--size-200);      /* 本文 */
+  --text-lead: var(--size-300);      /* リスト項目・リード */
+  --text-title: var(--size-400);     /* 作品名・小見出し */
+  --text-heading: var(--size-500);   /* セクション見出し */
+  --text-display: var(--size-600);   /* ヒーロー */
+  --text-wordmark: var(--size-700);  /* フッターのロゴタイプ */
+
+  /* Typography — weight */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-bold: 600;
+
+  /* Typography — line height (和文は欧文より広めに) */
+  --leading-tight: 1.05;
+  --leading-heading: 1.35;
+  --leading-snug: 1.6;
+  --leading-body: 1.9;
+
+  /* Typography — tracking */
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0.02em;
+  --tracking-wide: 0.12em;
+
+  /* Typography — OpenType (palt: 見出しの和文プロポーショナル詰め) */
+  --features-body: "kern";
+  --features-heading: "palt", "kern";
+  --features-numeric: "tnum", "kern";
+
+  /* Spacing — role */
+  --space-inline: var(--space-2);
+  --space-stack-sm: var(--space-3);
+  --space-stack-md: var(--space-5);
+  --space-stack-lg: var(--space-8);
+  --space-section: clamp(var(--space-10), 5rem + 7vw, var(--space-12));
+
+  /* Layout */
+  --container-max: 90rem;   /* 1440 */
+  --measure: 38em;          /* 和文で 1 行 35–40 字 */
+  --gutter: clamp(1.25rem, 0.5rem + 3.3vw, 4rem);
+  --grid-columns: 12;
+  --grid-gap: clamp(1rem, 0.5rem + 1.5vw, 2rem);
+  --header-height: 4rem;
+
+  /* Border */
+  --border-width: 1px;
+  --border-width-strong: 2px;
+  --radius: 0;
+
+  /* Motion */
+  --duration-fast: 160ms;
+  --duration-base: 320ms;
+  --duration-slow: 640ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Elevation */
+  --z-header: 100;
+  --z-skip: 200;
+
+  color-scheme: light dark;
+}
+
+/* --------------------------------------------------------------------------
+   Dark theme — Semantic だけを差し替える
+   -------------------------------------------------------------------------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg: var(--gray-950);
+    --color-surface: var(--gray-900);
+    --color-text: #ededed;
+    --color-text-muted: #9c9c9c;
+    --color-text-subtle: var(--gray-700);
+    --color-line: var(--gray-800);
+    --color-line-strong: #ededed;
+    --color-focus: #ededed;
+    --color-selection-bg: #ededed;
+    --color-selection-text: var(--gray-950);
+    --color-header-bg: color-mix(in srgb, var(--gray-950) 82%, transparent);
+  }
+}
+
+:root[data-theme="dark"] {
+  --color-bg: var(--gray-950);
+  --color-surface: var(--gray-900);
+  --color-text: #ededed;
+  --color-text-muted: #9c9c9c;
+  --color-text-subtle: var(--gray-700);
+  --color-line: var(--gray-800);
+  --color-line-strong: #ededed;
+  --color-focus: #ededed;
+  --color-selection-bg: #ededed;
+  --color-selection-text: var(--gray-950);
+  --color-header-bg: color-mix(in srgb, var(--gray-950) 82%, transparent);
+}
